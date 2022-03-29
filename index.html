@@ -28,14 +28,23 @@ function preload ()
 
 function create ()
 {
-    this.add.sprite(400, 300, 'player');
-    keys = this.input.keyboard.addKeys('W,A,S,D');
+    this.player = this.add.image(400, 300, 'player');
+    this.keyboard = this.input.keyboard.addKeys('W,A,S,D');
 }
 
 function update () 
 {
-    if (this.keys.LEFT.isDown){
-        player.setVelocity(-5, 0);
+    if (this.keyboard.W.isDown){
+        this.player.y--;
+    }
+    if (this.keyboard.S.isDown){
+        this.player.y++;
+    }
+    if (this.keyboard.A.isDown){
+        this.player.x--;
+    }
+    if (this.keyboard.D.isDown){
+        this.player.x++;
     }
 }
 </script>
