@@ -35,16 +35,16 @@ function create ()
 function update () 
 {
     if (this.keyboard.W.isDown){
-        this.player.y--;
+        this.player.y -= 5;
     }
     if (this.keyboard.S.isDown){
-        this.player.y++;
+        this.player.y += 5;
     }
     if (this.keyboard.A.isDown){
-        this.player.x--;
+        this.player.x -= 5;
     }
     if (this.keyboard.D.isDown){
-        this.player.x++;
+        this.player.x += 5;
     }
 }
 </script>
