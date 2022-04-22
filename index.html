@@ -34,16 +34,16 @@ function create ()
 
 function update () 
 {
-    if (this.keyboard.W.isDown){
+    if (this.keyboard.W.isDown && this.player.y != 0){
         this.player.y -= 5;
     }
-    if (this.keyboard.S.isDown){
+    if (this.keyboard.S.isDown && this.player.y != 600){
         this.player.y += 5;
     }
-    if (this.keyboard.A.isDown){
+    if (this.keyboard.A.isDown && this.player.x != 0){
         this.player.x -= 5;
     }
-    if (this.keyboard.D.isDown){
+    if (this.keyboard.D.isDown && this.player.x != 800){
         this.player.x += 5;
     }
 }
