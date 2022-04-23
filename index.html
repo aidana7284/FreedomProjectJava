@@ -30,7 +30,9 @@ function preload ()
 function create ()
 {
     this.player = this.add.image(200, 300, 'player');
+    this.player.setScale(0.5);
     this.object = this.add.image(600, 300, 'dot');
+    this.object.setScale(0.25);
     this.keyboard = this.input.keyboard.addKeys('W,A,S,D');
 }
 
@@ -48,9 +50,10 @@ function update ()
     if (this.keyboard.D.isDown && this.player.x != 800){
         this.player.x += 5;
     }
-    if ((this.player.y == this.object.y) && (this.player.x == this.object.x)){
+    if ((this.player.x )){
         this.object.destroy();
         this.object = this.add.image(Math.floor(Math.random() * 801), Math.floor(Math.random() * 601), 'dot');
+        this.object.setScale(0.25);
     }
 }
 </script>
