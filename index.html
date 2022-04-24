@@ -24,6 +24,7 @@ var scoreText;
 
 var text;
 var timedEvent;
+
 function preload ()
 {
     this.load.image('player', 'clash.jpeg');
@@ -33,17 +34,15 @@ function preload ()
 
 function create ()
 {
-
     this.player = this.add.image(200, 300, 'player');
     this.player.setScale(0.5);
     this.object = this.add.image(600, 300, 'dot');
     this.object.setScale(0.25);
     this.keyboard = this.input.keyboard.addKeys('W,A,S,D');
-    scoreText = this.add.text(16, 12, 'score: 0', { fontSize: '32px', fill: '#999' });
-    this.initialTime = 3;
+    scoreText = this.add.text(16, 12, 'Score: 0', { fontSize: '32px', fill: '#999' });
+    this.initialTime = 5;
     text = this.add.text(600, 16, 'Time Left: ' + formatTime(this.initialTime));
     timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
-
 }
 
 function formatTime(seconds){
@@ -65,11 +64,11 @@ function onEvent ()
         timer.paused = true;
     }
     text.setText('Time Left: ' + formatTime(this.initialTime));
- 
 }
 
 function update ()
 {
+    // player movement
     if (this.keyboard.W.isDown && this.player.y != 0){
         this.player.y -= 5;
     }
@@ -82,6 +81,8 @@ function update ()
     if (this.keyboard.D.isDown && this.player.x != 800){
         this.player.x += 5;
     }
+    
+    // when player touches objective
     if (((this.object.x <= this.player.x + 60) && (this.object.x >= this.player.x - 60)) && ((this.object.y <= this.player.y + 60) && (this.object.y >= this.player.y - 60))){
         this.object.destroy();
         this.object = this.add.image(Math.floor(Math.random() * 801), Math.floor(Math.random() * 601), 'dot');
@@ -89,7 +90,11 @@ function update ()
         score+=1;
         this.initialTime += 1;
         scoreText.setText('Score: ' + score);
-       
+    }
+    
+    // objective fail
+    if (this.initialTime == 0){
+        endText = this.add.text(16, 50, 'Game Over', { fontSize: '32px', fill: '#999' });
     }
 }
 </script>
