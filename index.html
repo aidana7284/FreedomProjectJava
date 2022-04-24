@@ -21,6 +21,9 @@ var config = {
 var game = new Phaser.Game(config);
 var score = 0;
 var scoreText;
+
+var text;
+var timedEvent;
 function preload ()
 {
     this.load.image('player', 'clash.jpeg');
@@ -36,7 +39,33 @@ function create ()
     this.object = this.add.image(600, 300, 'dot');
     this.object.setScale(0.25);
     this.keyboard = this.input.keyboard.addKeys('W,A,S,D');
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#999' });
+    scoreText = this.add.text(16, 12, 'score: 0', { fontSize: '32px', fill: '#999' });
+    this.initialTime = 30;
+    text = this.add.text(600, 16, 'Time Left: ' + formatTime(this.initialTime));
+    timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
+
+}
+
+function formatTime(seconds){
+    // Minutes
+    var minutes = Math.floor(seconds/60);
+    // Seconds
+    var partInSeconds = seconds%60;
+    // Adds left zeros to seconds
+    partInSeconds = partInSeconds.toString().padStart(2,'0');
+    // Returns formated time
+    return `${minutes}:${partInSeconds}`;
+}
+
+function onEvent ()
+{
+    this.initialTime -= 1; // One second
+      //The if statement below pauses the timer when its at 0
+       if (this.initialTime == -1) {
+        timer.paused = true;
+    }
+    text.setText('Time Left: ' + formatTime(this.initialTime));
+ 
 }
 
 function update ()
@@ -58,7 +87,9 @@ function update ()
         this.object = this.add.image(Math.floor(Math.random() * 801), Math.floor(Math.random() * 601), 'dot');
         this.object.setScale(0.25);
         score+=1;
+        this.initialTime += 1;
         scoreText.setText('Score: ' + score);
+       
     }
 }
 </script>
