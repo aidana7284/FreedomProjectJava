@@ -30,7 +30,7 @@ function preload ()
 
 function create ()
 {
-   
+
     this.player = this.add.image(200, 300, 'player');
     this.player.setScale(0.5);
     this.object = this.add.image(600, 300, 'dot');
@@ -39,7 +39,7 @@ function create ()
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#999' });
 }
 
-function update () 
+function update ()
 {
     if (this.keyboard.W.isDown && this.player.y != 0){
         this.player.y -= 5;
