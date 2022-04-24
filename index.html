@@ -40,7 +40,7 @@ function create ()
     this.object.setScale(0.25);
     this.keyboard = this.input.keyboard.addKeys('W,A,S,D');
     scoreText = this.add.text(16, 12, 'score: 0', { fontSize: '32px', fill: '#999' });
-    this.initialTime = 30;
+    this.initialTime = 3;
     text = this.add.text(600, 16, 'Time Left: ' + formatTime(this.initialTime));
     timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
 
