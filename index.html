@@ -21,9 +21,9 @@ var config = {
 var game = new Phaser.Game(config);
 var score = 0;
 var scoreText;
-
 var text;
 var timedEvent;
+var endText;
 function preload ()
 {
     this.load.image('player', 'clash.jpeg');
@@ -40,7 +40,8 @@ function create ()
     this.object.setScale(0.25);
     this.keyboard = this.input.keyboard.addKeys('W,A,S,D');
     scoreText = this.add.text(16, 12, 'score: 0', { fontSize: '32px', fill: '#999' });
-    this.initialTime = 30;
+    endText = this.add.text(200, 12, 'a ', { fontSize: '32px', fill: '#999' });
+    this.initialTime = 3;
     text = this.add.text(600, 16, 'Time Left: ' + formatTime(this.initialTime));
     timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
 
@@ -62,6 +63,7 @@ function onEvent ()
     this.initialTime -= 1; // One second
       //The if statement below pauses the timer when its at 0
        if (this.initialTime == -1) {
+        endText.setText('END Your Score Was: ' + score);
         timer.paused = true;
     }
     text.setText('Time Left: ' + formatTime(this.initialTime));
