@@ -35,7 +35,7 @@ function preload ()
 function create ()
 {
     this.backs = this.add.image(400, 300, 'back');
-    this.backs.setScale(1.7);
+    this.backs.setScale(1.7); 
     this.player = this.add.image(200, 300, 'player');
     this.player.setScale(0.5);
     this.object = this.add.image(600, 300, 'dot');
@@ -63,7 +63,7 @@ function onEvent ()
 {
     this.initialTime -= 1; // One second
       //The if statement below pauses the timer when its at 0
-       if (this.initialTime == -1) {
+    if (this.initialTime == -1) {
         endText.setText('END Your Score Was: ' + score);
         timer.paused = true;
     }
