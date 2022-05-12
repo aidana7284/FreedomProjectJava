@@ -45,6 +45,7 @@ function create ()
     scoreText = this.add.text(16, 12, 'Score: 0', { fontSize: '32px', fill: '#000' });
     this.initialTime = 5;
     text = this.add.text(600, 16, 'Time Left: ' + formatTime(this.initialTime));
+    intro = this.add.text(270,200, 'Use W,A,S,D keys', { fontSize: '32px', fill: '#FF0000' });
     timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true, paused: false });
 }
 
@@ -72,15 +73,19 @@ function update ()
     if (!timedEvent.paused){
         if (this.keyboard.W.isDown && this.player.y != 0){
             this.player.y -= 5;
+            intro.destroy();
         }
         if (this.keyboard.S.isDown && this.player.y != 600){
             this.player.y += 5;
+            intro.destroy();
         }
         if (this.keyboard.A.isDown && this.player.x != 0){
             this.player.x -= 5;
+            intro.destroy();
         }
         if (this.keyboard.D.isDown && this.player.x != 800){
             this.player.x += 5;
+            intro.destroy();
         }
     }
     
