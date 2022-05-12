@@ -45,7 +45,7 @@ function create ()
     scoreText = this.add.text(16, 12, 'Score: 0', { fontSize: '32px', fill: '#000' });
     this.initialTime = 5;
     text = this.add.text(600, 16, 'Time Left: ' + formatTime(this.initialTime));
-    intro = this.add.text(270,200, 'Use W,A,S,D keys and try to collect as many Magikarp as possible before the timer ends!', { fontSize: '32px', fill: '#FF0000' });
+    intro = this.add.text(15,200, 'Use W,A,S,D keys to try to collect as many Magikarp as possible before the timer ends!', { fontSize: '15px', fill: '#FF0000' });
     timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true, paused: false });
 }
 
