@@ -45,7 +45,7 @@ function create ()
     scoreText = this.add.text(16, 12, 'Score: 0', { fontSize: '32px', fill: '#000' });
     this.initialTime = 5;
     text = this.add.text(600, 16, 'Time Left: ' + formatTime(this.initialTime));
-    timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
+    timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true, paused: false });
 }
 
 function formatTime(seconds){
@@ -61,29 +61,27 @@ function formatTime(seconds){
 
 function onEvent ()
 {
+     //The if statement below pauses the timer when its at 0
     this.initialTime -= 1; // One second
-      //The if statement below pauses the timer when its at 0
-    if (this.initialTime == -1) {
-        endText.setText('END Your Score Was: ' + score);
-        timer.paused = true;
-    }
     text.setText('Time Left: ' + formatTime(this.initialTime));
 }
 
 function update ()
 {
     // player movement
-    if (this.keyboard.W.isDown && this.player.y != 0){
-        this.player.y -= 5;
-    }
-    if (this.keyboard.S.isDown && this.player.y != 600){
-        this.player.y += 5;
-    }
-    if (this.keyboard.A.isDown && this.player.x != 0){
-        this.player.x -= 5;
-    }
-    if (this.keyboard.D.isDown && this.player.x != 800){
-        this.player.x += 5;
+    if (!timedEvent.paused){
+        if (this.keyboard.W.isDown && this.player.y != 0){
+            this.player.y -= 5;
+        }
+        if (this.keyboard.S.isDown && this.player.y != 600){
+            this.player.y += 5;
+        }
+        if (this.keyboard.A.isDown && this.player.x != 0){
+            this.player.x -= 5;
+        }
+        if (this.keyboard.D.isDown && this.player.x != 800){
+            this.player.x += 5;
+        }
     }
     
     // when player touches objective
@@ -91,13 +89,14 @@ function update ()
         this.object.destroy();
         this.object = this.add.image(Math.floor(Math.random() * 801), Math.floor(Math.random() * 601), 'dot');
         this.object.setScale(0.25);
-        score+=1;
-        this.initialTime += 1;
+        score++;
+        this.initialTime++;
         scoreText.setText('Score: ' + score);
     }
     
     // objective fail
     if (this.initialTime == 0){
+        timedEvent.paused = true;
         endText = this.add.text(16, 50, 'Game Over', { fontSize: '32px', fill: '#00' });
     }
 }
