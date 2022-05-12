@@ -62,7 +62,6 @@ function formatTime(seconds){
 
 function onEvent ()
 {
-     //The if statement below pauses the timer when its at 0
     this.initialTime -= 1; // One second
     text.setText('Time Left: ' + formatTime(this.initialTime));
 }
