@@ -45,8 +45,8 @@ function create ()
     scoreText = this.add.text(16, 12, 'Score: 0', { fontSize: '32px', fill: '#000' });
     this.initialTime = 5;
     text = this.add.text(600, 16, 'Time Left: ' + formatTime(this.initialTime));
-    intro = this.add.text(15,200, 'Use W,A,S,D keys to try to collect as many Magikarp as possible before the timer ends!', { fontSize: '15px', fill: '#FF0000' });
-    timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true, paused: false });
+    intro = this.add.text(150,150, 'Use W,A,S,D keys to try to collect as many \nMagikarp as possible before the timer ends! \nYou get an extra second for each Magikarp caught!', { fontSize: '20px', fill: '#FF0000' });
+    timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true, paused: true });
 }
 
 function formatTime(seconds){
@@ -69,22 +69,28 @@ function onEvent ()
 function update ()
 {
     // player movement
-    if (!timedEvent.paused){
+    if (!this.initialTime == 0){
         if (this.keyboard.W.isDown && this.player.y != 0){
+            timedEvent.paused = false;
             this.player.y -= 5;
             intro.destroy();
         }
         if (this.keyboard.S.isDown && this.player.y != 600){
+            timedEvent.paused = false;
             this.player.y += 5;
             intro.destroy();
         }
         if (this.keyboard.A.isDown && this.player.x != 0){
+            timedEvent.paused = false;
             this.player.x -= 5;
             intro.destroy();
+            this.player.flipX = true;
         }
         if (this.keyboard.D.isDown && this.player.x != 800){
+            timedEvent.paused = false;
             this.player.x += 5;
             intro.destroy();
+            this.player.resetFlip();
         }
     }
     
@@ -101,7 +107,7 @@ function update ()
     // objective fail
     if (this.initialTime == 0){
         timedEvent.paused = true;
-        endText = this.add.text(16, 50, 'Game Over', { fontSize: '32px', fill: '#00' });
+        endText = this.add.text(300, 150, 'Game Over!', { fontSize: '32px', fill: '#00' });
     }
 }
 </script>
