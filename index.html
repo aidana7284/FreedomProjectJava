@@ -110,6 +110,7 @@ function update ()
         endText = this.add.text(150, 150, 'Game Over! Press R to retry', { fontSize: '32px', fill: '#00' });
         if (this.keyboard.R.isDown){
             this.scene.restart();
+            score = 0;
         }
     }
 }
